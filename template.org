@@ -1,0 +1,142 @@
+#+title: Template
+#+subtitle: For lot's of slides
+#+date: <2022-02-01>
+#+author: Roland Tritsch
+#+email: roland@tritsch.email
+
+#+options: timestamp:t
+#+options: date:t 
+#+options: title:t
+#+options: author:t
+#+options: toc:t
+#+options: num:t
+#+options: reveal_global_header:t
+#+options: reveal_global_footer:t
+#+options: reveal_single_file:nil
+
+#+reveal_data_state: alert
+#+reveal_hlevel: 2
+#+reveal_init_options: height: "80%"
+#+reveal_init_options: width: "80%"
+#+reveal_init_options: slideNumber: "c/t"
+#+reveal_width: 100%
+#+reveal_height: 100%
+#+reveal_margin: 1.0
+#+reveal_max_scale: 1.0
+#+reveal_min_scale: 1.0
+#+reveal_slide_number: t
+#+reveal_speed: 1
+#+reveal_theme: beige
+#+reveal_title_slide_background: ./images/c-valdez-KhpFiOX9MdQ-unsplash.jpg
+#+reveal_title_slide_background_size: 200px
+#+reveal_toc_slide_background: ./images/susan-q-yin-2JIvboGLeho-unsplash.jpg
+#+reveal_toc_slide_background_size: 200px
+#+reveal_default_slide_background: ./images/nasa-Yj1M5riCKk4-unsplash.jpg
+#+reveal_default_slide_background_size: 200px
+#+reveal_default_slide_background_position: center
+#+reveal_default_slide_background_trans: slide
+#+reveal_trans: cube
+#+reveal_slide_header: HEADER
+#+reveal_slide_footer: FOOTER
+#+reveal_plugins: (notes highlight)
+
+* Intro
+** Roland
+   - Picture
+** TEDN.LIFE
+   - Picture
+* TOC
+  - [[Intro][Intro]]
+    - [[Roland][Roland]]
+    - [[TEDN.LIFE][TEDN.LIFE]]
+  - [[TOC][TOC]]
+  - [[Simply Slide][Simply Slide]]
+  - [[Splitting Slide][Splitting Slide]]
+#+reveal: split:t
+  - [[Nested Slides][Nested Slides]]
+    - [[Slide 1][Slide 1]]
+    - [[Slide 2][Slide 2]]
+    - [[Slide 3][Slide 3]]
+  - [[Single Color Background][Single Color Background]]
+  - [[Single Image Background][Single Image Background]]
+  - [[Single GIF Background][Single GIF Background]]
+#+reveal: split:t
+  - [[Fragmented Slides][Fragmented Slides]]
+  - [[Code Highlighting][Code Highlighting]]
+  - [[Speaker Notes][Speaker Notes]]
+* Simply Slide
+  - Bullet
+  - Bullet
+  - Bullet
+* Splitting Slide
+  - Bullet
+  - Bullet
+  - Bullet
+#+reveal: split:t
+  - Bullet
+  - Bullet
+  - Bullet
+* Nested Slides
+** Slide 1
+   - Bullet
+   - Bullet
+   - Bullet
+** Slide 2
+   - Bullet
+   - Bullet
+   - Bullet
+** Slide 3
+   - Bullet
+   - Bullet
+   - Bullet
+* Single Color Background
+:PROPERTIES:
+:reveal_background: #00ff00
+:END:
+   - Bullet
+   - Bullet
+   - Bullet
+* Single Image Background
+:PROPERTIES:
+:reveal_background: ./images/planet.jpeg
+:reveal_background_trans: slide
+:END:
+   - Bullet
+   - Bullet
+   - Bullet
+* Single GIF Background
+:PROPERTIES:
+:reveal_background: https://media.giphy.com/media/zQhFEBrX6plKg/giphy.gif
+:reveal_background_trans: slide
+:END:
+   - Bullet
+   - Bullet
+   - Bullet
+* Fragmented Slides
+#+attr_reveal: :frag (grow shrink roll-in fade-out highlight-red highlight-green highlight-blue appear none) :frag_idx (4 3 2 1 -)
+   - I will grow.
+   - I will shrink.
+   - I rolled in.
+   - I will fade out.
+   - I am red.
+   - I am green.
+   - I am blue.
+   - I will appear.
+   - I don't fragment.
+* Code Highlighting
+#+ATTR_REVEAL: :code_attribs data-line-numbers='1|3'
+#+BEGIN_SRC c++
+int main()
+{
+  cout << "Hello" << endl;
+}
+#+END_SRC
+* Speaker Notes
+  - Bullet
+  - Bullet
+  - Bullet
+#+begin_notes
+- Note
+- Note
+- Note
+#+end_notes
