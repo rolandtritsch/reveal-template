@@ -20,13 +20,13 @@
 # not working #+reveal_init_options: height: "80%"
 # not working #+reveal_init_options: width: "80%"
 #+reveal_init_options: slideNumber: "c/t"
-#+reveal_width: 100%
-#+reveal_height: 100%
-#+reveal_margin: 1.0
-#+reveal_max_scale: 1.0
-#+reveal_min_scale: 1.0
-#+reveal_slide_number: t
-#+reveal_speed: 1
+#+reveal_width: 80%
+#+reveal_height: 80%
+#+reveal_margin: 2.0
+#+reveal_max_scale: 2.0
+#+reveal_min_scale: 2.0
+#+reveal_slide_number: nil
+#+reveal_speed: 10
 #+reveal_theme: beige
 # working #+reveal_title_slide_background: ./images/c-valdez-KhpFiOX9MdQ-unsplash.jpg
 # working #+reveal_title_slide_background_size: 200px
@@ -92,6 +92,13 @@
    - Bullet
    - Bullet
    - Bullet
+* Lots of text
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+fringilla neque non mi placerat, vel mattis velit malesuada. Aliquam
+erat volutpat. Pellentesque habitant morbi tristique senectus et netus
+et malesuada fames ac turpis egestas. Nulla malesuada lobortis velit
+vitae dignissim. Vestibulum lorem felis, malesuada eu arcu sed, tempus
+luctus odio.
 * Single Color Background
 :PROPERTIES:
 :reveal_background: #00ff00
