@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
-PUBLISH_PATTERNS := *-slides.html *-slides.pdf *-slides_with-notes.pdf *-doc.pdf *-doc.tex *-repo.zip
+PUBLISH_PATTERNS := *-slides.html *-slides.pdf *-slides_with-notes.pdf *-doc.pdf *-doc.tex
 
 .PHONY: help
 help: ## Show help for all targets
@@ -38,12 +38,6 @@ generate-pdf: ## Generate PDF files from org files in lectures/
 	@./scripts/generate-pdf.sh
 	@echo "All PDF files generated"
 
-.PHONY: generate-zip
-publish-zip: ## Generate zip files from/for lab repos
-	@echo "Generating ZIP files from/for lap repos ..."
-	@./scripts/generate-zip.sh
-	@echo "All ZIP files generated"
-
 .PHONY: verify-slides
 verify-slides: ## Screenshot generated slide PDFs into tmp/ for visual verification
 	@echo "Screenshotting slide PDFs ..."
@@ -51,7 +45,7 @@ verify-slides: ## Screenshot generated slide PDFs into tmp/ for visual verificat
 	@echo "Screenshots saved to tmp/"
 
 .PHONY: publish
-publish: generate-pdf generate-zip generate-html fix-reveal-notes generate-print-pdf ## Move generated HTML/PDF/ZIP files to public/
-	@echo "Publishing HTML/PDF/ZIP files to public ..."
+publish: generate-pdf generate-html fix-reveal-notes generate-print-pdf ## Move generated HTML/PDF files to public/
+	@echo "Publishing HTML/PDF files to public ..."
 	@for pattern in $(PUBLISH_PATTERNS); do find . -not -path './public/*' -name "$$pattern" -type f | xargs -I {file} mv {file} ./public; done
 	@echo "Published successfully"
