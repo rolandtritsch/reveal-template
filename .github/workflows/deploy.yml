@@ -32,13 +32,11 @@ jobs:
             texlive-latex-extra \
             texlive-fonts-recommended
 
-      - name: Install Emacs packages
+      - name: Install ox-reveal
         run: |
-          emacs --batch -Q \
-            --eval "(setq package-archives '((\"melpa\" . \"https://melpa.org/packages/\") (\"gnu\" . \"https://elpa.gnu.org/packages/\")))" \
-            --eval "(package-initialize)" \
-            --eval "(package-refresh-contents)" \
-            --eval "(package-install 'ox-reveal)"
+          mkdir -p ~/.emacs.d/lisp
+          curl -fsSL https://raw.githubusercontent.com/yjwen/org-reveal/master/ox-reveal.el \
+            -o ~/.emacs.d/lisp/ox-reveal.el
 
       - uses: actions/setup-node@v4
         with:

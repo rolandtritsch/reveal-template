@@ -19,6 +19,7 @@ FAILED=0
 for FILE in "${ORG_FILES[@]}"; do
     echo "  Generating HTML from ${FILE}"
     if ! emacs --batch -Q \
+        --eval "(add-to-list 'load-path (expand-file-name \"~/.emacs.d/lisp\"))" \
         --eval "(setq package-user-dir (expand-file-name \"~/.emacs.d/elpa\"))" \
         --eval "(package-initialize)" \
         --eval "(require 'org)" \
