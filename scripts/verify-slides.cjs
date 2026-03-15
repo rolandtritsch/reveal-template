@@ -31,8 +31,7 @@ if (!fs.existsSync(TMP_DIR)) {
 }
 
 const files = [
-  ...findPdfs(path.resolve('./slides')),
-  ...findPdfs(path.resolve('./docs')),
+  ...findPdfs(path.resolve('./public')),
 ];
 
 if (files.length === 0) {
