@@ -1,0 +1,162 @@
+#+TITLE: Template
+#+SUBTITLE: For lot's of slides
+#+DATE: 01-Jan-2027
+#+AUTHOR: Roland Tritsch
+#+EMAIL: roland@tritsch.email
+
+#+OPTIONS: title:t
+#+OPTIONS: date:nil 
+#+OPTIONS: author:nil
+#+OPTIONS: email:t
+#+OPTIONS: timestamp:t
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+OPTIONS: reveal_global_header:nil
+#+OPTIONS: reveal_global_footer:nil
+#+OPTIONS: reveal_single_file:nil
+
+#+REVEAL_DATA_STATE: alert
+#+REVEAL_HLEVEL: 1
+# not working #+REVEAL_INIT_OPTIONS: height: "80%"
+# not working #+REVEAL_INIT_OPTIONS: width: "80%"
+#+REVEAL_INIT_OPTIONS: slideNumber: "c/t"
+#+REVEAL_WIDTH: 80%
+#+REVEAL_HEIGHT: 80%
+#+REVEAL_MARGIN: 2.0
+#+REVEAL_MAX_SCALE: 2.0
+#+REVEAL_MIN_SCALE: 2.0
+#+REVEAL_SLIDE_NUMBER: nil
+#+REVEAL_SPEED: 10
+#+REVEAL_THEME: beige
+# working #+REVEAL_TITLE_SLIDE_BACKGROUND: ./images/c-valdez-KhpFiOX9MdQ-unsplash.jpg
+# working #+REVEAL_TITLE_SLIDE_BACKGROUND_SIZE: 200px
+# not working #+REVEAL_TOC_SLIDE_BACKGROUND: ./images/susan-q-yin-2JIvboGLeho-unsplash.jpg
+# not working #+REVEAL_TOC_SLIDE_BACKGROUND_SIZE: 200px
+# not working #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./images/nasa-Yj1M5riCKk4-unsplash.jpg
+# not working #+REVEAL_DEFAULT_SLIDE_BACKGROUND_SIZE: 200px
+# not working #+REVEAL_DEFAULT_SLIDE_BACKGROUND_POSITION: center
+# not working #+REVEAL_DEFAULT_SLIDE_BACKGROUND_TRANS: slide
+#+REVEAL_TRANS: cube
+# working #+REVEAL_SLIDE_HEADER: HEADER
+# working #+REVEAL_SLIDE_FOOTER: FOOTER
+#+REVEAL_PLUGINS: (notes highlight)
+# working #+REVEAL_TITLE_SLIDE: <h1 class=title>%t</h1><h3 class=title>%s</h3><h3 class=date>%d</h3><h4 class=email>%e</h4>
+
+* TOC
+  - [[TOC][TOC]]
+  - [[Intro][Intro]]
+    - [[Roland][Roland]]
+    - [[TEDN.LIFE][TEDN.LIFE]]
+  - [[Simply Slide][Simply Slide]]
+  - [[Splitting Slide][Splitting Slide]]
+#+REVEAL: split:t
+  - [[Nested Slides][Nested Slides]]
+    - [[Slide 1][Slide 1]]
+    - [[Slide 2][Slide 2]]
+    - [[Slide 3][Slide 3]]
+  - [[Single Color Background][Single Color Background]]
+  - [[Single Image Background][Single Image Background]]
+  - [[Single GIF Background][Single GIF Background]]
+#+REVEAL: split:t
+  - [[Fragmented Slides][Fragmented Slides]]
+  - [[Code Highlighting][Code Highlighting]]
+  - [[Speaker Notes][Speaker Notes]]
+* Intro
+** Roland
+   #+CAPTION: About Roland - tedn.life/about
+   #+NAME: roland.jpeg
+   [[./images/roland.jpeg]]
+** TEDN.LIFE
+   - Picture
+* Simply Slide
+  - Bullet
+  - Bullet
+  - Bullet
+* Splitting Slide
+  - Bullet
+  - Bullet
+  - Bullet
+#+REVEAL: split:t
+  - Bullet
+  - Bullet
+  - Bullet
+* Nested Slides
+** Slide 1
+   - Bullet
+   - Bullet
+   - Bullet
+** Slide 2
+   - Bullet
+   - Bullet
+   - Bullet
+** Slide 3
+   - Bullet
+   - Bullet
+   - Bullet
+* Lots of text
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+fringilla neque non mi placerat, vel mattis velit malesuada. Aliquam
+erat volutpat. Pellentesque habitant morbi tristique senectus et netus
+et malesuada fames ac turpis egestas. Nulla malesuada lobortis velit
+vitae dignissim. Vestibulum lorem felis, malesuada eu arcu sed, tempus
+luctus odio.
+* Single Color Background
+:PROPERTIES:
+:reveal_background: #00ff00
+:END:
+   - Bullet
+   - Bullet
+   - Bullet
+* Single Image Background
+:PROPERTIES:
+:reveal_background: ./images/planet.jpeg
+:reveal_background_trans: slide
+:END:
+   - Bullet
+   - Bullet
+   - Bullet
+* Single GIF Background
+:PROPERTIES:
+:reveal_background: https://media.giphy.com/media/zQhFEBrX6plKg/giphy.gif
+:reveal_background_trans: slide
+:END:
+   - Bullet
+   - Bullet
+   - Bullet
+* Fragmented Slides
+#+ATTR_REVEAL: :frag (grow shrink roll-in fade-out highlight-red highlight-green highlight-blue appear none) :frag_idx (9 8 7 6 5 4 3 2 1 -)
+   - I will grow.
+   - I will shrink.
+   - I rolled in.
+   - I will fade out.
+   - I am red.
+   - I am green.
+   - I am blue.
+   - I will appear.
+   - I don't fragment.
+* Code Highlighting
+#+ATTR_REVEAL: :code_attribs data-line-numbers='1|3'
+#+BEGIN_SRC c++
+int main()
+{
+  cout << "Hello" << endl;
+}
+#+END_SRC
+* Speaker Notes
+  - Bullet
+  - Bullet
+  - Bullet
+#+BEGIN_NOTES
+- Note
+- Note
+- Note
+#+END_NOTES
+* Two colums
+
+  #+REVEAL_HTML: <div class="column" style="float:left; width: 50%">
+  - Bullet
+  - Bullet
+  - Bullet
+  #+REVEAL_HTML: </div>
+
+  #+REVEAL_HTML: <div class="column" style="float:right; width: 50%"><img src="./images/roland.jpeg"/></div>
