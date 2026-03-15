@@ -1,6 +1,8 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
+PUBLISH_PATTERNS := *-slides.html *-slides.pdf *-slides_with-notes.pdf *-doc.pdf *-doc.tex *-repo.zip
+
 .PHONY: help
 help: ## Show help for all targets
 	@echo "Available targets:"
@@ -9,7 +11,7 @@ help: ## Show help for all targets
 .PHONY: clean
 clean: ## Remove published files from public/
 	@echo "Cleaning files from public ..."
-	@rm -f ./public/*-slides.html ./public/*-slides.pdf ./public/*-slides_with-notes.pdf ./public/*-doc.pdf ./public/*-doc.tex ./public/*-repo.zip
+	@for pattern in $(PUBLISH_PATTERNS); do rm -f ./public/$$pattern; done
 	@echo "Cleaned"
 
 .PHONY: fix-reveal-notes
@@ -51,10 +53,5 @@ verify-slides: ## Screenshot generated slide PDFs into tmp/ for visual verificat
 .PHONY: publish
 publish: generate-pdf generate-zip generate-html fix-reveal-notes generate-print-pdf ## Move generated HTML/PDF/ZIP files to public/
 	@echo "Publishing HTML/PDF/ZIP files to public ..."
-	@find . -not -path './public/*' -name '*-slides.html' -type f | xargs -I {file} mv {file} ./public
-	@find . -not -path './public/*' -name '*-slides.pdf' -type f | xargs -I {file} mv {file} ./public
-	@find . -not -path './public/*' -name '*-slides_with-notes.pdf' -type f | xargs -I {file} mv {file} ./public
-	@find . -not -path './public/*' -name '*-doc.pdf' -type f | xargs -I {file} mv {file} ./public
-	@find . -not -path './public/*' -name '*-doc.tex' -type f | xargs -I {file} mv {file} ./public
-	@find . -not -path './public/*' -name '*-repo.zip' -type f | xargs -I {file} mv {file} ./public
+	@for pattern in $(PUBLISH_PATTERNS); do find . -not -path './public/*' -name "$$pattern" -type f | xargs -I {file} mv {file} ./public; done
 	@echo "Published successfully"
