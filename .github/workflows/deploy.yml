@@ -22,9 +22,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            emacs \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-fonts-recommended
+
+      - name: Install Emacs packages
+        run: |
+          emacs --batch -Q \
+            --eval "(setq package-archives '((\"melpa\" . \"https://melpa.org/packages/\") (\"gnu\" . \"https://elpa.gnu.org/packages/\")))" \
+            --eval "(package-initialize)" \
+            --eval "(package-refresh-contents)" \
+            --eval "(package-install 'ox-reveal)"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Puppeteer
+        run: npm install -g puppeteer
+
+      - name: Publish
+        run: make publish
+
       - uses: actions/configure-pages@v5
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public
+
       - id: deployment
         uses: actions/deploy-pages@v4
