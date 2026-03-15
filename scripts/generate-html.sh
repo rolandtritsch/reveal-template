@@ -26,10 +26,15 @@ for FILE in "${ORG_FILES[@]}"; do
         --eval "(require 'ox-reveal)" \
         --eval "(setq org-reveal-root \"https://cdn.jsdelivr.net/npm/reveal.js\")" \
         --visit "${FILE}" \
+        --eval "(save-excursion (goto-char (point-min)) (while (re-search-forward \"{{{time(%Y-%m-%d_%H:%M:%S)}}}\" nil t) (replace-match (format-time-string \"%Y-%m-%d_%H:%M:%S\"))))" \
         --eval "(condition-case err (org-reveal-export-to-html) (error (message \"Error exporting %s: %s\" \"${FILE}\" err) (kill-emacs 1)))" \
         2>/dev/null; then
         echo "  ERROR: failed to export ${FILE}" >&2
         FAILED=1
+    else
+        HTML="${FILE%.org}.html"
+        sed -i 's|</head>|<style>.reveal .slide-number { right: auto; left: 0; width: 100%; text-align: center; background: transparent; color: #333; }</style>\n</head>|' "${HTML}"
+        sed -i 's|Reveal.initialize({|Reveal.initialize({\n  slideNumber: "c/t",|' "${HTML}"
     fi
 done
 

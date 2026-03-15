@@ -10,6 +10,7 @@ in_initialize && /^}\);/ {
     autoSlide = ""
     loop = ""
     autoSlideStoppable = ""
+    slideNumber = ""
 
     for (i = 0; i < buf_n; i++) {
         if (buffer[i] ~ /width:/) {
@@ -28,12 +29,17 @@ in_initialize && /^}\);/ {
             match(buffer[i], /autoSlideStoppable:(true|false)/)
             autoSlideStoppable = substr(buffer[i], RSTART, RLENGTH)
         }
+        if (buffer[i] ~ /slideNumber:/) {
+            match(buffer[i], /slideNumber: *"[^"]*"/)
+            slideNumber = substr(buffer[i], RSTART, RLENGTH)
+        }
     }
 
     if (width != "") print "  " width ","
     if (autoSlide != "") print "  " autoSlide ","
     if (loop != "") print "  " loop ","
     if (autoSlideStoppable != "") print "  " autoSlideStoppable ","
+    if (slideNumber != "") print "  " slideNumber ","
     print "  plugins: [ RevealNotes ]"
     print "});"
 

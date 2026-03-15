@@ -5,10 +5,10 @@
 #+EMAIL: roland@tritsch.email
 #+REVEAL_THEME: beige
 # Lecture slides: width only
-#+REVEAL_INIT_OPTIONS: width:"80%"
+#+REVEAL_INIT_OPTIONS: width:"80%", slideNumber: "c/t"
 # Lab slides: add auto-advance with pause/loop
-# #+REVEAL_INIT_OPTIONS: width:"80%", autoSlide:10000, loop:true, autoSlideStoppable:true
-#+REVEAL_TITLE_SLIDE: <h1 class=title>%t</h1><h3 class=title>%s</h3><h3 class=date>%d</h3><h4 class=email>%e</h4>
+# #+REVEAL_INIT_OPTIONS: width:"80%", autoSlide:10000, loop:true, autoSlideStoppable:true, slideNumber: "c/t"
+#+REVEAL_TITLE_SLIDE: <h1 class=title>%t</h1><h3 class=title>%s</h3><h3 class=date>%d</h3><h4 class=email>%e</h4><p class=date style="font-size: 0.5em">Version - {{{time(%Y-%m-%d_%H:%M:%S)}}}</p>
 #+OPTIONS: title:nil author:nil email:nil date:nil timestamp:nil
 #+OPTIONS: toc:nil num:nil
 #+REVEAL_PLUGINS: (notes highlight)
