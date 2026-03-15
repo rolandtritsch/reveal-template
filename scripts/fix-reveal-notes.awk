@@ -1,6 +1,7 @@
 /Reveal\.initialize\({/ {
     print
     in_initialize = 1
+    buf_n = 0
     next
 }
 
@@ -10,7 +11,7 @@ in_initialize && /^}\);/ {
     loop = ""
     autoSlideStoppable = ""
 
-    for (i in buffer) {
+    for (i = 0; i < buf_n; i++) {
         if (buffer[i] ~ /width:/) {
             match(buffer[i], /width:"[^"]*"/)
             width = substr(buffer[i], RSTART, RLENGTH)
@@ -37,12 +38,13 @@ in_initialize && /^}\);/ {
     print "});"
 
     delete buffer
+    buf_n = 0
     in_initialize = 0
     next
 }
 
 in_initialize {
-    buffer[length(buffer)] = $0
+    buffer[buf_n++] = $0
     next
 }
 
