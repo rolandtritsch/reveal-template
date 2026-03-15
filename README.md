@@ -10,8 +10,8 @@ A starter template for creating browser-based slide presentations using [reveal.
 ## Usage
 
 1. Copy `slides/010-slides.org` and edit it to your liking
-2. Run `make publish` to generate HTML, PDF, and ZIP outputs and move them to `docs/`
-3. Push to `trunk` — GitHub Actions deploys `public/` to [GitHub Pages] automatically
+2. Run `make publish` to generate HTML and PDF outputs and move them to `public/`
+3. Push to `trunk` — GitHub Actions runs `make publish` and deploys `public/` to [GitHub Pages] automatically
 
 ### Make targets
 
@@ -21,8 +21,8 @@ A starter template for creating browser-based slide presentations using [reveal.
 | `fix-reveal-notes` | Patch reveal.js speaker notes compatibility |
 | `generate-pdf` | Export `.org` lecture files to PDF via LaTeX |
 | `generate-print-pdf` | Export slide HTML to PDF via Puppeteer |
-| `publish` | Run all of the above and move outputs to `docs/` |
-| `clean` | Remove generated files from `docs/` |
+| `publish` | Run all of the above and move outputs to `public/` |
+| `clean` | Remove generated files from `public/` |
 | `verify-slides` | Screenshot slide PDFs into `tmp/` for visual review |
 
 ## Slide features demonstrated
