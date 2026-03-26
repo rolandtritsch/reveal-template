@@ -5,7 +5,8 @@ A starter template for creating browser-based slide presentations using [reveal.
 ## Prerequisites
 
 - [Emacs] installed with org-mode and ox-reveal configured — see [this config][emacs-config] for reference
-- [Node.js] installed (for PDF generation via Puppeteer)
+- [Node.js] installed with [Puppeteer] installed globally (`npm install -g puppeteer`) for slide PDF generation
+- [pdflatex] installed (e.g. `sudo apt install texlive-latex-base texlive-latex-recommended texlive-latex-extra`) for document PDF generation
 
 ## Usage
 
@@ -44,4 +45,6 @@ The template in `slides/010-slides.org` covers the most common patterns:
 [Emacs]: https://www.gnu.org/software/emacs
 [emacs-config]: https://github.com/rolandtritsch/emacs.d/blob/trunk/roland/21-org-mode.org#reveal
 [Node.js]: https://nodejs.org
+[Puppeteer]: https://pptr.dev
+[pdflatex]: https://www.tug.org/applications/pdftex
 [GitHub Pages]: https://pages.github.com
