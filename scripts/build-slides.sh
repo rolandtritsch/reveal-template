@@ -1,0 +1,55 @@
+#!/bin/bash
+# Full pipeline: org -> HTML -> PDF + PDF-with-notes -> public/
+# Usage: build-slides.sh <file-slides.org>
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+export NODE_PATH="$(npm root -g)"
+
+FILE="$(realpath "$1")"
+BASE="${FILE%.org}"
+HTML="${BASE}.html"
+PDF="${BASE}.pdf"
+PDF_NOTES="${BASE}_with-notes.pdf"
+PUBLIC="${REPO_ROOT}/public"
+
+# 1. Generate HTML
+echo "  Generating HTML from ${FILE}"
+emacs --batch -Q \
+    --eval "(add-to-list 'load-path (expand-file-name \"~/.emacs.d/lisp\"))" \
+    --eval "(setq package-user-dir (expand-file-name \"~/.emacs.d/elpa\"))" \
+    --eval "(package-initialize)" \
+    --eval "(require 'org)" \
+    --eval "(require 'ox-reveal)" \
+    --eval "(setq org-reveal-root \"https://cdn.jsdelivr.net/npm/reveal.js\")" \
+    --visit "${FILE}" \
+    --eval "(save-excursion (goto-char (point-min)) (while (re-search-forward \"{{{time(%Y-%m-%d_%H:%M:%S)}}}\" nil t) (replace-match (format-time-string \"%Y-%m-%d_%H:%M:%S\"))))" \
+    --eval "(condition-case err (org-reveal-export-to-html) (error (message \"Error exporting %s: %s\" \"${FILE}\" err) (kill-emacs 1)))" \
+    2>/dev/null
+
+if [[ ! -s "${HTML}" ]]; then
+    echo "  ERROR: emacs produced an empty file for ${FILE}" >&2
+    exit 1
+fi
+
+# 2. Inject slide number style and config
+sed -i 's|</head>|<style>.reveal .slide-number { right: auto; left: 0; width: 100%; text-align: center; background: transparent; color: #333; }</style>\n</head>|' "${HTML}"
+sed -i 's|Reveal.initialize({|Reveal.initialize({\n  slideNumber: "c/t",|' "${HTML}"
+
+# 3. Patch Reveal.js notes plugin
+"${SCRIPT_DIR}/fix-reveal-notes.sh" "${HTML}"
+
+# 4. Generate PDFs
+echo "  Generating PDF from ${HTML}"
+node "${SCRIPT_DIR}/print-slides.cjs" "file://${HTML}" "${PDF}"
+
+echo "  Generating PDF with notes from ${HTML}"
+node "${SCRIPT_DIR}/print-slides.cjs" "file://${HTML}" "${PDF_NOTES}" --notes
+
+# 5. Move all artifacts to public/
+mkdir -p "${PUBLIC}"
+mv "${HTML}" "${PUBLIC}/"
+mv "${PDF}" "${PUBLIC}/"
+mv "${PDF_NOTES}" "${PUBLIC}/"

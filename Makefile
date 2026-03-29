@@ -1,52 +1,37 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
-PUBLISH_PATTERNS := *-slides.html *-slides.pdf *-slides_with-notes.pdf *-doc.pdf *-doc.tex
+SLIDES_ORG    := $(wildcard slides/*-slides.org)
+DOCS_ORG      := $(wildcard docs/*-doc.org)
+PUBLIC_SLIDES := $(patsubst slides/%.org,public/%.pdf,$(SLIDES_ORG))
+PUBLIC_DOCS   := $(patsubst docs/%.org,public/%.pdf,$(DOCS_ORG))
 
-.PHONY: help
+.PHONY: help clean clean-full publish verify-slides
+
 help: ## Show help for all targets
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: clean
-clean: ## Remove published files from public/
-	@echo "Cleaning files from public ..."
-	@for pattern in $(PUBLISH_PATTERNS); do rm -f ./public/$$pattern; done
+clean: ## Remove generated files from public/
+	@echo "Cleaning ./public ..."
+	@rm -f public/*-slides.html public/*-slides.pdf public/*-slides_with-notes.pdf public/*-doc.pdf public/*-doc.tex
 	@echo "Cleaned"
 
-.PHONY: fix-reveal-notes
-fix-reveal-notes: ## Patch Reveal.js 3.x/4.x in all generated HTML files
-	@echo "Fixing Reveal.js 3.x/4.x ..."
-	@./scripts/fix-reveal-notes.sh
-	@echo "All HTML files fixed"
+clean-full: clean ## Remove all generated HTML/PDF/TeX artifacts
+	@echo "Cleaning all artifacts ..."
+	@find . -path ./public -prune -o \( -name '*.html' -o -name '*.pdf' -o -name '*.tex' \) -type f -print | xargs -r rm -f
+	@echo "Cleaned"
 
-.PHONY: generate-html
-generate-html: ## Generate Reveal.js HTML files from org files (slides)
-	@echo "Generating HTML files from org files ..."
-	@./scripts/generate-html.sh
-	@echo "All HTML files generated"
+public/%-slides.pdf: slides/%-slides.org
+	@./scripts/build-slides.sh "$<"
 
-.PHONY: generate-print-pdf
-generate-print-pdf: ## Generate PDF files from Reveal.js HTML slides via Puppeteer
-	@echo "Generating PDFs from Reveal.js HTML slides ..."
-	@./scripts/generate-print-pdf.sh
-	@echo "All presentation PDFs generated"
+public/%-doc.pdf: docs/%-doc.org
+	@./scripts/build-doc.sh "$<"
 
-.PHONY: generate-pdf
-generate-pdf: ## Generate PDF files from org files in lectures/
-	@echo "Generating PDF files from org files ..."
-	@./scripts/generate-pdf.sh
-	@echo "All PDF files generated"
+publish: $(PUBLIC_SLIDES) $(PUBLIC_DOCS) ## Build and publish all slides and docs
+	@mkdir -p ./public
 
-.PHONY: verify-slides
 verify-slides: ## Screenshot generated slide PDFs into tmp/ for visual verification
 	@echo "Screenshotting slide PDFs ..."
 	@node ./scripts/verify-slides.cjs
 	@echo "Screenshots saved to tmp/"
-
-.PHONY: publish
-publish: generate-pdf generate-html fix-reveal-notes generate-print-pdf ## Move generated HTML/PDF files to public/
-	@echo "Publishing HTML/PDF files to public ..."
-	@mkdir -p ./public
-	@for pattern in $(PUBLISH_PATTERNS); do find . -not -path './public/*' -name "$$pattern" -type f | xargs -I {file} mv {file} ./public; done
-	@echo "Published successfully"
