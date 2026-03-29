@@ -58,7 +58,7 @@ Because the tester was mocking the code!
 
 * Full-Width Image
 
-#+REVEAL_HTML: <figure><img src="./images/placeholder.png" width="60%"/><figcaption style="font-size: 0.5em;">Source: <a href="https://example.com">https://example.com</a></figcaption></figure>
+#+REVEAL_HTML: <figure><img src="./images/roland.png" width="60%"/><figcaption style="font-size: 0.5em;">Source: <a href="https://example.com">https://example.com</a></figcaption></figure>
 
 #+BEGIN_NOTES
 
@@ -74,7 +74,7 @@ Because the tester was mocking the code!
 - Bullet
 - Bullet
 #+REVEAL_HTML:   </div>
-#+REVEAL_HTML:   <div style="width: 30%; display: flex; align-items: center; justify-content: center;"><figure><img src="./images/placeholder.png" width="80%"/><figcaption style="font-size: 0.5em;">Source: <a href="https://example.com">https://example.com</a></figcaption></figure></div>
+#+REVEAL_HTML:   <div style="width: 30%; display: flex; align-items: center; justify-content: center;"><figure><img src="./images/roland.png" width="80%"/><figcaption style="font-size: 0.5em;">Source: <a href="https://example.com">https://example.com</a></figcaption></figure></div>
 #+REVEAL_HTML: </div>
 
 #+BEGIN_NOTES
@@ -117,7 +117,7 @@ Example content for sub-slide 3
 
 * Clickable Image (e.g. Demo/Video Link)
 
-#+REVEAL_HTML: <figure><a href="https://example.com" target="_blank"><img src="./images/placeholder.png" width="40%"/></a><figcaption style="font-size: 0.5em;">Source: <a href="https://example.com">https://example.com</a></figcaption></figure>
+#+REVEAL_HTML: <figure><a href="https://example.com" target="_blank"><img src="./images/roland.png" width="40%"/></a><figcaption style="font-size: 0.5em;">Source: <a href="https://example.com">https://example.com</a></figcaption></figure>
 
 #+BEGIN_NOTES
 

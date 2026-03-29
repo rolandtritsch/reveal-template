@@ -10,3 +10,7 @@
 * Template Heading
 
 Template text.
+
+#+CAPTION: Roland
+#+ATTR_LATEX: :width 0.3\textwidth
+[[./images/roland.png]]

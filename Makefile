@@ -30,6 +30,7 @@ public/%-doc.pdf: docs/%-doc.org
 
 publish: $(PUBLIC_SLIDES) $(PUBLIC_DOCS) ## Build and publish all slides and docs
 	@mkdir -p ./public
+	@ln -sfn ../images ./public/images
 
 verify-slides: ## Screenshot generated slide PDFs into tmp/ for visual verification
 	@echo "Screenshotting slide PDFs ..."
