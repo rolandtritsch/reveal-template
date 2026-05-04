@@ -22,11 +22,11 @@ emacs --batch -Q \
     --eval "(setq package-user-dir (expand-file-name \"~/.emacs.d/elpa\"))" \
     --eval "(package-initialize)" \
     --eval "(require 'org)" \
-    --eval "(require 'ox-reveal)" \
-    --eval "(setq org-reveal-root \"https://cdn.jsdelivr.net/npm/reveal.js\")" \
+    --eval "(require 'org-re-reveal)" \
+    --eval "(setq org-re-reveal-root \"https://cdn.jsdelivr.net/npm/reveal.js\")" \
     --visit "${FILE}" \
     --eval "(save-excursion (goto-char (point-min)) (while (re-search-forward \"{{{time(%Y-%m-%d_%H:%M:%S)}}}\" nil t) (replace-match (format-time-string \"%Y-%m-%d_%H:%M:%S\"))))" \
-    --eval "(condition-case err (org-reveal-export-to-html) (error (message \"Error exporting %s: %s\" \"${FILE}\" err) (kill-emacs 1)))" \
+    --eval "(condition-case err (org-re-reveal-export-to-html) (error (message \"Error exporting %s: %s\" \"${FILE}\" err) (kill-emacs 1)))" \
     2>/dev/null
 
 if [[ ! -s "${HTML}" ]]; then
@@ -34,21 +34,17 @@ if [[ ! -s "${HTML}" ]]; then
     exit 1
 fi
 
-# 2. Inject slide number style and config
+# 2. Inject slide number style
 sed -i 's|</head>|<style>.reveal .slide-number { right: auto; left: 0; width: 100%; text-align: center; background: transparent; color: #333; }</style>\n</head>|' "${HTML}"
-sed -i 's|Reveal.initialize({|Reveal.initialize({\n  slideNumber: "c/t",|' "${HTML}"
 
-# 3. Patch Reveal.js notes plugin
-"${SCRIPT_DIR}/fix-reveal-notes.sh" "${HTML}"
-
-# 4. Generate PDFs
+# 3. Generate PDFs
 echo "  Generating PDF from ${HTML}"
 node "${SCRIPT_DIR}/print-slides.cjs" "file://${HTML}" "${PDF}"
 
 echo "  Generating PDF with notes from ${HTML}"
 node "${SCRIPT_DIR}/print-slides.cjs" "file://${HTML}" "${PDF_NOTES}" --notes
 
-# 5. Move all artifacts to public/
+# 4. Move all artifacts to public/
 mkdir -p "${PUBLIC}"
 mv "${HTML}" "${PUBLIC}/"
 mv "${PDF}" "${PUBLIC}/"

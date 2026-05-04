@@ -3,6 +3,7 @@
 #+DATE: 01-Jan-2027
 #+AUTHOR: Roland Tritsch
 #+EMAIL: roland@tritsch.email
+#+REVEAL_VERSION: 4
 #+REVEAL_THEME: beige
 # Lecture slides: width only
 #+REVEAL_INIT_OPTIONS: width:"80%", slideNumber: "c/t"
@@ -169,7 +170,7 @@ Example content for sub-slide 3
 
 * Fragmented Slide
 
-#+ATTR_REVEAL: :frag (grow shrink roll-in fade-out highlight-red highlight-green highlight-blue appear none) :frag_idx (9 8 7 6 5 4 3 2 1 -)
+#+ATTR_REVEAL: :frag (grow shrink roll-in fade-out highlight-red highlight-green highlight-blue appear none) :frag_idx (9 8 7 6 5 4 3 2 1)
 - I will grow.
 - I will shrink.
 - I rolled in.
