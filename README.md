@@ -23,7 +23,6 @@ A starter template for creating browser-based slide presentations using [reveal.
 | `generate-print-pdf` | Export slide HTML to PDF via Puppeteer |
 | `publish` | Run all of the above and move outputs to `public/` |
 | `clean` | Remove generated files from `public/` |
-| `verify-slides` | Screenshot slide PDFs into `tmp/` for visual review |
 
 ## Slide features demonstrated
 

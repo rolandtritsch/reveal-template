@@ -6,7 +6,7 @@ DOCS_ORG      := $(wildcard docs/*-doc.org)
 PUBLIC_SLIDES := $(patsubst slides/%.org,public/%.pdf,$(SLIDES_ORG))
 PUBLIC_DOCS   := $(patsubst docs/%.org,public/%.pdf,$(DOCS_ORG))
 
-.PHONY: help clean clean-full publish verify-slides
+.PHONY: help clean clean-full publish
 
 help: ## Show help for all targets
 	@echo "Available targets:"
@@ -31,8 +31,3 @@ public/%-doc.pdf: docs/%-doc.org
 publish: $(PUBLIC_SLIDES) $(PUBLIC_DOCS) ## Build and publish all slides and docs
 	@mkdir -p ./public
 	@ln -sfn ../images ./public/images
-
-verify-slides: ## Screenshot generated slide PDFs into tmp/ for visual verification
-	@echo "Screenshotting slide PDFs ..."
-	@node ./scripts/verify-slides.cjs
-	@echo "Screenshots saved to tmp/"
