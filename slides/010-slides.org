@@ -16,8 +16,7 @@
 # #+REVEAL_SLIDE_HEADER: HEADER
 # #+REVEAL_SLIDE_FOOTER: FOOTER
 
-# Shared content (lecturer bio, module header, etc.)
-# #+INCLUDE: ./lecture-000-inc.org
+#+INCLUDE: ./000-inc.org
 
 * Dad-Joke of the Week
 

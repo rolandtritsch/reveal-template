@@ -21,6 +21,7 @@ emacs --batch -Q \
     --eval "(require 'org)" \
     --eval "(require 'ox-latex)" \
     --visit "${FILE}" \
+    --eval "(save-excursion (goto-char (point-min)) (while (re-search-forward \"{{{time(%Y-%m-%d %H:%M:%S)}}}\" nil t) (replace-match (format-time-string \"%Y-%m-%d %H:%M:%S\"))))" \
     --eval "(condition-case err (org-latex-export-to-pdf) (error (message \"Error exporting %s: %s\" \"${FILE}\" err) (kill-emacs 1)))" \
     2>/dev/null
 

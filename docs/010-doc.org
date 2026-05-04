@@ -2,7 +2,7 @@
 #+SUBTITLE: Template Subtitle
 #+AUTHOR: Roland Tritsch
 #+EMAIL: roland@tritsch.email
-#+DATE: 01-Jan-2027
+#+DATE: {{{time(%Y-%m-%d %H:%M:%S)}}}
 #+OPTIONS: toc:nil
 #+LATEX_CLASS_OPTIONS: [12pt]
 #+LATEX_HEADER: \usepackage[left=4cm,right=4cm,top=2cm,bottom=2cm]{geometry}
