@@ -18,11 +18,9 @@ A starter template for creating browser-based slide presentations using [reveal.
 
 | Target | Description |
 |---|---|
-| `generate-html` | Export `.org` slide files to reveal.js HTML |
-| `generate-pdf` | Export `.org` lecture files to PDF via LaTeX |
-| `generate-print-pdf` | Export slide HTML to PDF via Puppeteer |
-| `publish` | Run all of the above and move outputs to `public/` |
+| `publish` | Build all slide and document outputs into `public/` |
 | `clean` | Remove generated files from `public/` |
+| `clean-full` | Remove generated HTML/PDF/TeX artifacts outside `public/` |
 
 ## Slide features demonstrated
 
